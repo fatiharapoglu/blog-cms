@@ -1,0 +1,316 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Tangerine:wght@400;700&display=swap");
+
+:root {
+    --primary: rgb(248, 230, 230);
+    --secondary: rgb(155 111 185);
+    --third: rgba(237, 209, 255, 0.5);
+    --fourth: yellowgreen;
+    --fifth: rgba(37, 37, 37, 0.5);
+    --background-primary: rgb(19, 19, 19);
+    --font-1: "Montserrat", sans-serif;
+    --font-2: "Tangerine", cursive;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--background-primary);
+    color: var(--primary);
+    font-family: var(--font-1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 20vw;
+    background-color: rgb(0, 0, 0, 0.75);
+
+    .name {
+        letter-spacing: 3px;
+        color: var(--fourth);
+
+        span {
+            font-size: 0.75rem;
+            color: var(--third);
+        }
+    }
+
+    .slogan {
+        letter-spacing: 3px;
+        color: var(--third);
+        font-family: var(--font-2);
+        font-weight: 600;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        color: var(--secondary);
+
+        a {
+            padding: 0.25rem;
+            transition: color 0.25s ease-in-out;
+
+            &:hover {
+                color: var(--fourth);
+            }
+        }
+    }
+
+    .active {
+        color: var(--fourth);
+    }
+}
+
+.title {
+    text-align: center;
+    color: var(--secondary);
+    padding-top: 2rem;
+    letter-spacing: 5px;
+}
+
+.home {
+    .home-header {
+        height: clamp(100px, 20vh, 300px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 20vw;
+        gap: 1rem;
+        background-color: rgba(0, 0, 0, 0.35);
+
+        h1 {
+            font-weight: normal;
+        }
+
+        h4 {
+            letter-spacing: 2px;
+            font-weight: normal;
+            font-size: 1rem;
+            color: var(--third);
+        }
+    }
+}
+
+.posts {
+    padding: 2rem 20vw 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .post {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border-bottom: 1px dashed var(--third);
+        padding-bottom: 2rem;
+        position: relative;
+
+        &::before {
+            content: "⮕";
+            font-size: x-large;
+            color: var(--fourth);
+            position: absolute;
+            left: -2rem;
+        }
+
+        &::after {
+            content: "See more";
+            color: var(--fourth);
+            font-size: 0.75rem;
+            position: absolute;
+            right: 0;
+            bottom: 0.5rem;
+        }
+
+        .post-title {
+            color: var(--primary);
+            font-weight: 400;
+        }
+
+        .post-content {
+            color: var(--third);
+        }
+
+        &:hover .post-title {
+            color: var(--third);
+        }
+    }
+}
+
+.single-post-container {
+    padding: 0 20vw;
+
+    .single-post {
+        padding: 3rem 0 10rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .single-post-title {
+        font-size: 3rem;
+    }
+
+    .single-post-content {
+        font-size: 1.25rem;
+        text-align: justify;
+        line-height: 2rem;
+        color: var(--third);
+    }
+
+    .comment-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 3rem 0;
+
+        .comment {
+            display: flex;
+            gap: 0.35rem;
+            padding: 1rem;
+            border: 1px solid var(--fifth);
+            border-radius: 5px;
+            justify-content: space-between;
+            align-items: center;
+
+            .comment-date {
+                font-size: 0.6rem;
+                align-self: flex-start;
+                color: var(--third);
+            }
+
+            .comment-main {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                h3 {
+                    font-size: 0.6rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    color: var(--secondary);
+                }
+
+                p {
+                    font-size: 0.75rem;
+                }
+            }
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 3rem;
+
+        h3 {
+            font-weight: normal;
+        }
+
+        label {
+            font-weight: bold;
+            padding: 0.5rem 0;
+            width: 100%;
+            color: var(--third);
+        }
+
+        input,
+        textarea {
+            padding: 0.5rem;
+            width: 100%;
+            border: none;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: var(--fifth);
+            color: var(--primary);
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: var(--third);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+
+            &:hover {
+                background-color: var(--fourth);
+                color: black;
+            }
+        }
+    }
+}
+
+.footer {
+    display: flex;
+    height: 7.5vh;
+    justify-content: center;
+    background-color: rgb(0, 0, 0, 0.75);
+    margin-top: auto;
+
+    .about {
+        display: flex;
+        align-items: center;
+    }
+
+    .github-icon {
+        height: 25px;
+        padding-left: 10px;
+        padding: 0 10px;
+        transition: transform 1s ease-in-out;
+
+        &:hover {
+            transform: rotate(360deg);
+        }
+    }
+
+    a {
+        transition: color 0.25s ease-in-out;
+        color: var(--secondary);
+
+        &:hover {
+            color: var(--fourth);
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0.75rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(37, 37, 37);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--third);
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary);
+}
