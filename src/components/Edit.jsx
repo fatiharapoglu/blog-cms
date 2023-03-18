@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 
+import AuthError from "./AuthError";
+
 const Edit = (props) => {
     const [isChecked, setIsChecked] = useState(props.singlePost.post.isPublished);
     const formRef = useRef(null);
@@ -16,6 +18,7 @@ const Edit = (props) => {
                 body: JSON.stringify(entries),
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${props.user?.token}`,
                 },
             });
 
@@ -33,6 +36,8 @@ const Edit = (props) => {
     const handleCancel = () => {
         props.setIsEditing(false);
     };
+
+    if (!props.user?.token) return <AuthError />;
 
     return (
         <div className="new-post">

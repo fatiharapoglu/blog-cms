@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import AuthError from "./AuthError";
 import Edit from "./Edit";
 
 const SinglePost = (props) => {
@@ -10,7 +12,11 @@ const SinglePost = (props) => {
     const navigate = useNavigate();
 
     const getSinglePost = async () => {
-        const response = await fetch(`http://localhost:3000/api/v1/posts/${props.postID}`);
+        const response = await fetch(`http://localhost:3000/api/v1/posts/${props.postID}`, {
+            headers: {
+                Authorization: `Bearer ${props.user?.token}`,
+            },
+        });
         const data = await response.json();
         setSinglePost(data);
     };
@@ -20,6 +26,9 @@ const SinglePost = (props) => {
             try {
                 await fetch(`http://localhost:3000/api/v1/posts/${props.postID}`, {
                     method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${props.user?.token}`,
+                    },
                 });
 
                 navigate("/blog-cms/all");
@@ -37,6 +46,9 @@ const SinglePost = (props) => {
                     `http://localhost:3000/api/v1/posts/${props.postID}/comments/${commentID}`,
                     {
                         method: "DELETE",
+                        headers: {
+                            Authorization: `Bearer ${props.user?.token}`,
+                        },
                     }
                 );
 
@@ -53,7 +65,14 @@ const SinglePost = (props) => {
     };
 
     const getComments = async () => {
-        const response = await fetch(`http://localhost:3000/api/v1/posts/${props.postID}/comments`);
+        const response = await fetch(
+            `http://localhost:3000/api/v1/posts/${props.postID}/comments`,
+            {
+                headers: {
+                    Authorization: `Bearer ${props.user?.token}`,
+                },
+            }
+        );
         const data = await response.json();
         setComments(data);
     };
@@ -78,8 +97,10 @@ const SinglePost = (props) => {
     }, [len, isEditing]);
 
     if (isEditing) {
-        return <Edit singlePost={singlePost} setIsEditing={setIsEditing} />;
+        return <Edit user={props.user} singlePost={singlePost} setIsEditing={setIsEditing} />;
     }
+
+    if (!props.user?.token) return <AuthError />;
 
     return (
         <div className="single-post-container">

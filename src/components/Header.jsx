@@ -1,8 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 
 import logo from "../assets/favicon.png";
+import { logout } from "../auth";
 
-const Header = () => {
+const Header = (props) => {
+    const handleLogOut = () => {
+        logout();
+        props.setUser(null);
+    };
+
     return (
         <nav className="header">
             <div>
@@ -19,18 +25,27 @@ const Header = () => {
                     <li>
                         <NavLink to="/blog-cms/">Home</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/blog-cms/new">New Post</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/blog-cms/all">All Posts</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/blog-cms/published">Published</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/blog-cms/unpublished">Unpublished</NavLink>
-                    </li>
+                    {props.user?.token && (
+                        <>
+                            <li>
+                                <NavLink to="/blog-cms/new">New Post</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/blog-cms/all">All Posts</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/blog-cms/published">Published</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/blog-cms/unpublished">Unpublished</NavLink>
+                            </li>
+                            <li>
+                                <button className="btn" onClick={handleLogOut}>
+                                    Log Out
+                                </button>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </div>
         </nav>

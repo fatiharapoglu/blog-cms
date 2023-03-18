@@ -1,12 +1,21 @@
 import { useState } from "react";
 
-const Home = () => {
+import { login } from "../auth.js";
+
+const Home = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(`Username: ${username}, Password: ${password}`);
+
+        try {
+            const user = await login(username, password);
+            props.setUser(user);
+        } catch (err) {
+            console.log(err);
+        }
+        // snackbar here
     };
 
     const handleUsernameChange = (e) => {
@@ -16,6 +25,8 @@ const Home = () => {
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
+
+    if (props.user?.token) return <h1 className="auth">Welcome back, Fettan!</h1>;
 
     return (
         <div className="home">

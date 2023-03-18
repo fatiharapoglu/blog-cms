@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const NewPost = () => {
+import AuthError from "./AuthError";
+
+const NewPost = (props) => {
     const [isChecked, setIsChecked] = useState(false);
     const formRef = useRef(null);
     const navigate = useNavigate();
@@ -18,6 +20,7 @@ const NewPost = () => {
                 body: JSON.stringify(entries),
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${props.user?.token}`,
                 },
             });
 
@@ -31,6 +34,8 @@ const NewPost = () => {
     const handleCheckbox = () => {
         setIsChecked(!isChecked);
     };
+
+    if (!props.user?.token) return <AuthError />;
 
     return (
         <div className="new-post">
