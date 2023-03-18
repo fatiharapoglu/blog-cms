@@ -4,14 +4,26 @@ const Edit = (props) => {
     const [isChecked, setIsChecked] = useState(props.singlePost.post.isPublished);
     const formRef = useRef(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(formRef.current);
         formData.append("isPublished", isChecked);
         const entries = Object.fromEntries(formData);
 
-        console.log(entries);
-        // snackbar here
+        try {
+            await fetch(`http://localhost:3000/api/v1/posts/${props.singlePost.post._id}`, {
+                method: "PATCH",
+                body: JSON.stringify(entries),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            // snackbar here
+            props.setIsEditing(false);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     const handleCheckbox = () => {

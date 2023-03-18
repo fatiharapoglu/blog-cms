@@ -75,7 +75,7 @@ const SinglePost = (props) => {
         } catch (err) {
             console.log(err);
         }
-    }, [len]);
+    }, [len, isEditing]);
 
     if (isEditing) {
         return <Edit singlePost={singlePost} setIsEditing={setIsEditing} />;

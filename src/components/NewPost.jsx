@@ -1,17 +1,31 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewPost = () => {
     const [isChecked, setIsChecked] = useState(false);
     const formRef = useRef(null);
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(formRef.current);
         formData.append("isPublished", isChecked);
         const entries = Object.fromEntries(formData);
 
-        console.log(entries);
-        // snackbar here
+        try {
+            await fetch(`http://localhost:3000/api/v1/posts/new`, {
+                method: "POST",
+                body: JSON.stringify(entries),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            // snackbar here
+            navigate("/blog-cms/all");
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     const handleCheckbox = () => {
