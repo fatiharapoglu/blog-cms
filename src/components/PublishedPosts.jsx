@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const AllPosts = (props) => {
+const PublishedPosts = (props) => {
     const [posts, setPosts] = useState({});
 
-    const getAllPosts = async () => {
-        const response = await fetch("http://localhost:3000/api/v1/posts");
+    const getPublishedPosts = async () => {
+        const response = await fetch("http://localhost:3000/api/v1/posts/published");
         const data = await response.json();
         setPosts(data);
     };
@@ -16,7 +16,7 @@ const AllPosts = (props) => {
 
     useEffect(() => {
         try {
-            getAllPosts();
+            getPublishedPosts();
         } catch (err) {
             console.log(err);
         }
@@ -24,7 +24,7 @@ const AllPosts = (props) => {
 
     return (
         <>
-            <h1 className="title">ALL POSTS</h1>
+            <h1 className="title">PUBLISHED POSTS</h1>
             <main className="posts">
                 {posts.posts &&
                     posts.posts.map((post) => {
@@ -46,4 +46,4 @@ const AllPosts = (props) => {
     );
 };
 
-export default AllPosts;
+export default PublishedPosts;

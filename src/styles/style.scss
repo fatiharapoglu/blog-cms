@@ -37,7 +37,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 20vw;
+    padding: 1rem 5rem;
     background-color: rgb(0, 0, 0, 0.75);
 
     .name {
@@ -85,30 +85,53 @@ body {
 }
 
 .home {
-    .home-header {
-        height: clamp(100px, 20vh, 300px);
+    display: flex;
+    justify-content: center;
+
+    form {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: 0 20vw;
-        gap: 1rem;
-        background-color: rgba(0, 0, 0, 0.35);
+        align-items: center;
+        padding: 5rem 0;
+        min-width: 300px;
 
-        h1 {
+        h3 {
             font-weight: normal;
+            padding-bottom: 1rem;
         }
 
-        h4 {
-            letter-spacing: 2px;
-            font-weight: normal;
-            font-size: 1rem;
-            color: var(--third);
+        input {
+            padding: 0.75rem;
+            width: 100%;
+            border: none;
+            margin: 0.75rem 0;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: var(--fifth);
+            color: var(--primary);
+            font-family: inherit;
+        }
+
+        button {
+            background-color: var(--third);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+
+            &:hover {
+                background-color: var(--fourth);
+                color: black;
+            }
         }
     }
 }
 
 .posts {
-    padding: 2rem 20vw 0;
+    padding: 2rem 20vw;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -157,7 +180,7 @@ body {
     padding: 0 20vw;
 
     .single-post {
-        padding: 3rem 0 10rem;
+        padding: 3rem 0;
         display: flex;
         flex-direction: column;
         gap: 2rem;
@@ -213,89 +236,6 @@ body {
             }
         }
     }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 3rem;
-
-        h3 {
-            font-weight: normal;
-        }
-
-        label {
-            font-weight: bold;
-            padding: 0.5rem 0;
-            width: 100%;
-            color: var(--third);
-        }
-
-        input,
-        textarea {
-            padding: 0.5rem;
-            width: 100%;
-            border: none;
-            margin: 0.5rem 0;
-            border-radius: 5px;
-            box-sizing: border-box;
-            background-color: var(--fifth);
-            color: var(--primary);
-            font-family: inherit;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        button {
-            background-color: var(--third);
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
-
-            &:hover {
-                background-color: var(--fourth);
-                color: black;
-            }
-        }
-    }
-}
-
-.footer {
-    display: flex;
-    height: 7.5vh;
-    justify-content: center;
-    background-color: rgb(0, 0, 0, 0.75);
-    margin-top: auto;
-
-    .about {
-        display: flex;
-        align-items: center;
-    }
-
-    .github-icon {
-        height: 25px;
-        padding-left: 10px;
-        padding: 0 10px;
-        transition: transform 1s ease-in-out;
-
-        &:hover {
-            transform: rotate(360deg);
-        }
-    }
-
-    a {
-        transition: color 0.25s ease-in-out;
-        color: var(--secondary);
-
-        &:hover {
-            color: var(--fourth);
-        }
-    }
 }
 
 .error {
@@ -312,6 +252,65 @@ body {
 
         &:hover {
             color: var(--fourth);
+        }
+    }
+}
+
+.new-post {
+    form {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        gap: 1rem;
+        width: 75%;
+        min-width: 400px;
+        padding: 2rem;
+
+        input,
+        textarea {
+            padding: 0.75rem;
+            width: 100%;
+            border: none;
+            margin: 0.75rem 0;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: var(--fifth);
+            color: var(--primary);
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 300px;
+        }
+
+        label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 2rem;
+
+            input {
+                width: auto;
+            }
+        }
+
+        button {
+            background-color: var(--third);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+            font-size: 1.25rem;
+
+            &:hover {
+                background-color: var(--fourth);
+                color: black;
+            }
         }
     }
 }
