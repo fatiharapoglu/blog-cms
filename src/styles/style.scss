@@ -111,22 +111,6 @@ body {
             color: var(--primary);
             font-family: inherit;
         }
-
-        button {
-            background-color: var(--third);
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            margin-top: 0.75rem;
-            cursor: pointer;
-            transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
-
-            &:hover {
-                background-color: var(--fourth);
-                color: black;
-            }
-        }
     }
 }
 
@@ -265,6 +249,7 @@ body {
         width: 75%;
         min-width: 400px;
         padding: 2rem;
+        align-items: flex-start;
 
         input,
         textarea {
@@ -297,21 +282,39 @@ body {
         }
 
         button {
-            background-color: var(--third);
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            margin-top: 0.75rem;
-            cursor: pointer;
-            transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
             font-size: 1.25rem;
-
-            &:hover {
-                background-color: var(--fourth);
-                color: black;
-            }
         }
+    }
+}
+
+.admin-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+
+    .delete {
+        background-color: rgb(141, 57, 57);
+
+        &:hover {
+            color: inherit;
+            background-color: rgb(88, 20, 20);
+        }
+    }
+}
+
+.btn {
+    background-color: var(--third);
+    color: #fff;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+
+    &:hover {
+        background-color: var(--fourth);
+        color: black;
     }
 }
 

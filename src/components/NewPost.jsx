@@ -28,7 +28,9 @@ const NewPost = () => {
                     <input type="checkbox" checked={isChecked} onChange={handleCheckbox} />
                     Publish this?
                 </label>
-                <button type="submit">Send</button>
+                <button className="btn" type="submit">
+                    Send
+                </button>
             </form>
         </div>
     );

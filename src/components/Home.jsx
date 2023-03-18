@@ -37,7 +37,9 @@ const Home = () => {
                     value={password}
                     required
                 />
-                <button type="submit">Login</button>
+                <button className="btn" type="submit">
+                    Login
+                </button>
             </form>
         </div>
     );
