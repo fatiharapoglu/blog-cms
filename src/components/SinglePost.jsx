@@ -6,7 +6,7 @@ const SinglePost = (props) => {
     const [singlePost, setSinglePost] = useState({});
     const [comments, setComments] = useState({});
     const [isEditing, setIsEditing] = useState(false);
-    const [len, setLen] = useState(0); // this could be useless in here
+    const [len, setLen] = useState(0); // this is useless, just for re-render
     const navigate = useNavigate();
 
     const getSinglePost = async () => {
@@ -15,14 +15,32 @@ const SinglePost = (props) => {
         setSinglePost(data);
     };
 
-    const handleDelete = async () => {
+    const handleDeletePost = async () => {
         if (window.confirm("Are you sure you want to delete this post?")) {
             try {
                 await fetch(`http://localhost:3000/api/v1/posts/${props.postID}`, {
                     method: "DELETE",
                 });
 
-                navigate("/blog-cms/");
+                navigate("/blog-cms/all");
+            } catch (err) {
+                console.log(err);
+            }
+            // snackbar here
+        }
+    };
+
+    const handleDeleteComment = async (commentID) => {
+        if (window.confirm("Are you sure you want to delete this comment?")) {
+            try {
+                await fetch(
+                    `http://localhost:3000/api/v1/posts/${props.postID}/comments/${commentID}`,
+                    {
+                        method: "DELETE",
+                    }
+                );
+
+                setLen((current) => current + 1);
             } catch (err) {
                 console.log(err);
             }
@@ -76,7 +94,7 @@ const SinglePost = (props) => {
                     <button className="btn" onClick={handleEdit}>
                         Edit this post
                     </button>
-                    <button className="btn delete" onClick={handleDelete}>
+                    <button className="btn delete" onClick={handleDeletePost}>
                         Delete this post
                     </button>
                 </div>
@@ -91,6 +109,14 @@ const SinglePost = (props) => {
                                     <p>{comment.text}</p>
                                 </div>
                                 <div className="comment-date">{formatDate(comment.timestamp)}</div>
+                                <button
+                                    className="btn comment-delete"
+                                    onClick={() => {
+                                        handleDeleteComment(comment._id);
+                                    }}
+                                >
+                                    Remove
+                                </button>
                             </ul>
                         );
                     })}

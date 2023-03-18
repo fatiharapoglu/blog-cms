@@ -195,6 +195,7 @@ body {
             border-radius: 5px;
             justify-content: space-between;
             align-items: center;
+            position: relative;
 
             .comment-date {
                 font-size: 0.6rem;
@@ -315,6 +316,20 @@ body {
     &:hover {
         background-color: var(--fourth);
         color: black;
+    }
+}
+
+.comment-delete {
+    background-color: rgb(141, 57, 57);
+    font-size: 0.75rem;
+    padding: 5px;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+
+    &:hover {
+        color: inherit;
+        background-color: rgb(88, 20, 20);
     }
 }
 
