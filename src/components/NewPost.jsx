@@ -10,6 +10,7 @@ const NewPost = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const formData = new FormData(formRef.current);
         formData.append("isPublished", isChecked);
         const entries = Object.fromEntries(formData);
@@ -24,7 +25,7 @@ const NewPost = (props) => {
                 },
             });
 
-            // snackbar here
+            props.handleSnackbar("Post sent.");
             navigate("/blog-cms/all");
         } catch (err) {
             console.log(err);

@@ -1,13 +1,17 @@
 import { useRef, useState } from "react";
 
 import AuthError from "./AuthError";
+import Loading from "./Loading";
 
 const Edit = (props) => {
     const [isChecked, setIsChecked] = useState(props.singlePost.post.isPublished);
+    const [isLoading, setIsLoading] = useState(false);
     const formRef = useRef(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
+
         const formData = new FormData(formRef.current);
         formData.append("isPublished", isChecked);
         const entries = Object.fromEntries(formData);
@@ -22,7 +26,8 @@ const Edit = (props) => {
                 },
             });
 
-            // snackbar here
+            setIsLoading(false);
+            props.handleSnackbar("Post saved.");
             props.setIsEditing(false);
         } catch (err) {
             console.log(err);
@@ -38,6 +43,7 @@ const Edit = (props) => {
     };
 
     if (!props.user?.token) return <AuthError />;
+    if (isLoading) return <Loading />;
 
     return (
         <div className="new-post">

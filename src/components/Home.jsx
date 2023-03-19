@@ -13,9 +13,8 @@ const Home = (props) => {
             const user = await login(username, password);
             props.setUser(user);
         } catch (err) {
-            console.log(err);
+            props.handleSnackbar("Username or password is not correct.");
         }
-        // snackbar here
     };
 
     const handleUsernameChange = (e) => {

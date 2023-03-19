@@ -1,5 +1,5 @@
 const login = async (username, password) => {
-    const response = await fetch(`http://localhost:3000/login`, {
+    const res = await fetch(`http://localhost:3000/login`, {
         method: "POST",
         body: JSON.stringify({
             username,
@@ -9,7 +9,9 @@ const login = async (username, password) => {
             "Content-Type": "application/json",
         },
     });
-    const data = await response.json();
+    const data = await res.json();
+
+    if (res.status === 401) throw new Error("Username or password is not correct.");
 
     if (data.token) {
         localStorage.setItem("user", JSON.stringify(data));

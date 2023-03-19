@@ -3,15 +3,19 @@ import { useNavigate } from "react-router-dom";
 
 import AuthError from "./AuthError";
 import Edit from "./Edit";
+import FormatDate from "./FormatDate";
+import Loading from "./Loading";
 
 const SinglePost = (props) => {
     const [singlePost, setSinglePost] = useState({});
     const [comments, setComments] = useState({});
     const [isEditing, setIsEditing] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [len, setLen] = useState(0); // this is useless, just for re-render
     const navigate = useNavigate();
 
     const getSinglePost = async () => {
+        setIsLoading(true);
         const response = await fetch(`http://localhost:3000/api/v1/posts/${props.postID}`, {
             headers: {
                 Authorization: `Bearer ${props.user?.token}`,
@@ -19,6 +23,7 @@ const SinglePost = (props) => {
         });
         const data = await response.json();
         setSinglePost(data);
+        setIsLoading(false);
     };
 
     const handleDeletePost = async () => {
@@ -30,18 +35,18 @@ const SinglePost = (props) => {
                         Authorization: `Bearer ${props.user?.token}`,
                     },
                 });
-
+                props.handleSnackbar("Post deleted.");
                 navigate("/blog-cms/all");
             } catch (err) {
                 console.log(err);
             }
-            // snackbar here
         }
     };
 
     const handleDeleteComment = async (commentID) => {
         if (window.confirm("Are you sure you want to delete this comment?")) {
             try {
+                setIsLoading(true);
                 await fetch(
                     `http://localhost:3000/api/v1/posts/${props.postID}/comments/${commentID}`,
                     {
@@ -51,12 +56,12 @@ const SinglePost = (props) => {
                         },
                     }
                 );
-
+                props.handleSnackbar("Comment deleted.");
+                setIsLoading(false);
                 setLen((current) => current + 1);
             } catch (err) {
                 console.log(err);
             }
-            // snackbar here
         }
     };
 
@@ -65,6 +70,7 @@ const SinglePost = (props) => {
     };
 
     const getComments = async () => {
+        setIsLoading(true);
         const response = await fetch(
             `http://localhost:3000/api/v1/posts/${props.postID}/comments`,
             {
@@ -75,16 +81,7 @@ const SinglePost = (props) => {
         );
         const data = await response.json();
         setComments(data);
-    };
-
-    const formatDate = (date) => {
-        const newDate = new Date(date);
-        return newDate.toLocaleDateString("en-us", {
-            weekday: "short",
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-        });
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -97,10 +94,18 @@ const SinglePost = (props) => {
     }, [len, isEditing]);
 
     if (isEditing) {
-        return <Edit user={props.user} singlePost={singlePost} setIsEditing={setIsEditing} />;
+        return (
+            <Edit
+                user={props.user}
+                singlePost={singlePost}
+                setIsEditing={setIsEditing}
+                handleSnackbar={props.handleSnackbar}
+            />
+        );
     }
 
     if (!props.user?.token) return <AuthError />;
+    if (isLoading) return <Loading />;
 
     return (
         <div className="single-post-container">
@@ -108,6 +113,9 @@ const SinglePost = (props) => {
                 <div className="single-post">
                     <h1 className="single-post-title">{singlePost.post.title}</h1>
                     <p className="single-post-content">{singlePost.post.text}</p>
+                    <p className="single-post-date">
+                        <FormatDate date={singlePost.post.timestamp} />
+                    </p>
                 </div>
             )}
             {singlePost.post && (
@@ -129,7 +137,9 @@ const SinglePost = (props) => {
                                     <h3>{comment.username}</h3>
                                     <p>{comment.text}</p>
                                 </div>
-                                <div className="comment-date">{formatDate(comment.timestamp)}</div>
+                                <div className="comment-date">
+                                    <FormatDate date={comment.timestamp} />
+                                </div>
                                 <button
                                     className="btn comment-delete"
                                     onClick={() => {
