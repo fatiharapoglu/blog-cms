@@ -46,7 +46,7 @@ const UnpublishedPosts = (props) => {
                     posts.posts.map((post) => {
                         return (
                             <Link
-                                to={`/blog-cms/all/${post._id}`}
+                                to={`/all/${post._id}`}
                                 key={post._id}
                                 className="post"
                                 data-id={post._id}

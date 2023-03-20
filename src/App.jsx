@@ -35,29 +35,26 @@ const App = () => {
             <Header user={user} setUser={setUser} />
             <Routes>
                 <Route
-                    path="/blog-cms/"
+                    path="/"
                     element={<Home user={user} setUser={setUser} handleSnackbar={handleSnackbar} />}
                 />
+                <Route path="/all" element={<AllPosts user={user} setPostID={setPostID} />} />
                 <Route
-                    path="/blog-cms/all"
-                    element={<AllPosts user={user} setPostID={setPostID} />}
-                />
-                <Route
-                    path="/blog-cms/all/*"
+                    path="/all/*"
                     element={
                         <SinglePost user={user} postID={postID} handleSnackbar={handleSnackbar} />
                     }
                 />
                 <Route
-                    path="/blog-cms/published"
+                    path="/published"
                     element={<PublishedPosts user={user} setPostID={setPostID} />}
                 />
                 <Route
-                    path="/blog-cms/unpublished"
+                    path="/unpublished"
                     element={<UnpublishedPosts user={user} setPostID={setPostID} />}
                 />
                 <Route
-                    path="/blog-cms/new"
+                    path="/new"
                     element={<NewPost user={user} handleSnackbar={handleSnackbar} />}
                 />
                 <Route path="*" element={<NotFound />} />

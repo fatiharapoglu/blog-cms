@@ -12,7 +12,7 @@ const Header = (props) => {
     return (
         <nav className="header">
             <div>
-                <Link to="/blog-cms/">
+                <Link to="/">
                     <img src={logo} alt="logo" />
                 </Link>
                 <span className="name">
@@ -23,21 +23,21 @@ const Header = (props) => {
             <div>
                 <ul className="nav-links">
                     <li>
-                        <NavLink to="/blog-cms/">Home</NavLink>
+                        <NavLink to="/">Home</NavLink>
                     </li>
                     {props.user?.token && (
                         <>
                             <li>
-                                <NavLink to="/blog-cms/new">New Post</NavLink>
+                                <NavLink to="/new">New Post</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/blog-cms/all">All Posts</NavLink>
+                                <NavLink to="/all">All Posts</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/blog-cms/published">Published</NavLink>
+                                <NavLink to="/published">Published</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/blog-cms/unpublished">Unpublished</NavLink>
+                                <NavLink to="/unpublished">Unpublished</NavLink>
                             </li>
                             <li>
                                 <button className="btn" onClick={handleLogOut}>

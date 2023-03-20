@@ -26,7 +26,7 @@ const NewPost = (props) => {
             });
 
             props.handleSnackbar("Post sent.");
-            navigate("/blog-cms/all");
+            navigate("/all");
         } catch (err) {
             console.log(err);
         }

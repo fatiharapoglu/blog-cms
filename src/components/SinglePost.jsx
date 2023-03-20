@@ -39,7 +39,7 @@ const SinglePost = (props) => {
                     },
                 });
                 props.handleSnackbar("Post deleted.");
-                navigate("/blog-cms/all");
+                navigate("/all");
             } catch (err) {
                 console.log(err);
             }
