@@ -1,19 +1,11 @@
 {
     "name": "blog-cms",
     "private": true,
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "react",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/fatiharapoglu/blog-cms.git"
-    },
     "keywords": [],
     "author": "Fatih Arapoğlu",
     "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/fatiharapoglu/blog-cms/issues"
-    },
-    "homepage": "https://github.com/fatiharapoglu/blog-cms#readme",
     "type": "module",
     "scripts": {
         "dev": "vite",
