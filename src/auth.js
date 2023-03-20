@@ -1,5 +1,5 @@
 const login = async (username, password) => {
-    const res = await fetch(`http://localhost:3000/login`, {
+    const res = await fetch(`https://express-blog-api.cyclic.app/login`, {
         method: "POST",
         body: JSON.stringify({
             username,

@@ -16,7 +16,7 @@ const NewPost = (props) => {
         const entries = Object.fromEntries(formData);
 
         try {
-            await fetch(`http://localhost:3000/api/v1/posts/new`, {
+            await fetch(`https://express-blog-api.cyclic.app/api/v1/posts/new`, {
                 method: "POST",
                 body: JSON.stringify(entries),
                 headers: {

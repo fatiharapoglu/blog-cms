@@ -10,7 +10,7 @@ const PublishedPosts = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const getPublishedPosts = async () => {
-        const response = await fetch("http://localhost:3000/api/v1/posts/published", {
+        const response = await fetch("https://express-blog-api.cyclic.app/api/v1/posts/published", {
             headers: {
                 Authorization: `Bearer ${props.user?.token}`,
             },

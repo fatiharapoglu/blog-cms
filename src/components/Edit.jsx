@@ -17,14 +17,17 @@ const Edit = (props) => {
         const entries = Object.fromEntries(formData);
 
         try {
-            await fetch(`http://localhost:3000/api/v1/posts/${props.singlePost.post._id}`, {
-                method: "PATCH",
-                body: JSON.stringify(entries),
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${props.user?.token}`,
-                },
-            });
+            await fetch(
+                `https://express-blog-api.cyclic.app/api/v1/posts/${props.singlePost.post._id}`,
+                {
+                    method: "PATCH",
+                    body: JSON.stringify(entries),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${props.user?.token}`,
+                    },
+                }
+            );
 
             setIsLoading(false);
             props.handleSnackbar("Post saved.");

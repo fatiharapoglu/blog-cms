@@ -10,11 +10,14 @@ const UnpublishedPosts = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const getUnpublishedPosts = async () => {
-        const response = await fetch("http://localhost:3000/api/v1/posts/unpublished", {
-            headers: {
-                Authorization: `Bearer ${props.user?.token}`,
-            },
-        });
+        const response = await fetch(
+            "https://express-blog-api.cyclic.app/api/v1/posts/unpublished",
+            {
+                headers: {
+                    Authorization: `Bearer ${props.user?.token}`,
+                },
+            }
+        );
         const data = await response.json();
         setPosts(data);
         setIsLoading(false);

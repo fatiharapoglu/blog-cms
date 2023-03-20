@@ -16,11 +16,14 @@ const SinglePost = (props) => {
 
     const getSinglePost = async () => {
         setIsLoading(true);
-        const response = await fetch(`http://localhost:3000/api/v1/posts/${props.postID}`, {
-            headers: {
-                Authorization: `Bearer ${props.user?.token}`,
-            },
-        });
+        const response = await fetch(
+            `https://express-blog-api.cyclic.app/api/v1/posts/${props.postID}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${props.user?.token}`,
+                },
+            }
+        );
         const data = await response.json();
         setSinglePost(data);
         setIsLoading(false);
@@ -29,7 +32,7 @@ const SinglePost = (props) => {
     const handleDeletePost = async () => {
         if (window.confirm("Are you sure you want to delete this post?")) {
             try {
-                await fetch(`http://localhost:3000/api/v1/posts/${props.postID}`, {
+                await fetch(`https://express-blog-api.cyclic.app/api/v1/posts/${props.postID}`, {
                     method: "DELETE",
                     headers: {
                         Authorization: `Bearer ${props.user?.token}`,
@@ -48,7 +51,7 @@ const SinglePost = (props) => {
             try {
                 setIsLoading(true);
                 await fetch(
-                    `http://localhost:3000/api/v1/posts/${props.postID}/comments/${commentID}`,
+                    `https://express-blog-api.cyclic.app/api/v1/posts/${props.postID}/comments/${commentID}`,
                     {
                         method: "DELETE",
                         headers: {
@@ -72,7 +75,7 @@ const SinglePost = (props) => {
     const getComments = async () => {
         setIsLoading(true);
         const response = await fetch(
-            `http://localhost:3000/api/v1/posts/${props.postID}/comments`,
+            `https://express-blog-api.cyclic.app/api/v1/posts/${props.postID}/comments`,
             {
                 headers: {
                     Authorization: `Bearer ${props.user?.token}`,
