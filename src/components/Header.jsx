@@ -18,7 +18,6 @@ const Header = (props) => {
                 <span className="name">
                     Quill <span>&</span> Verse
                 </span>
-                <span className="slogan"> Poetry and Prose</span>
             </div>
             <div>
                 <ul className="nav-links">
