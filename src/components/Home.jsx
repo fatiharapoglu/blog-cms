@@ -30,7 +30,7 @@ const Home = (props) => {
         setPassword(e.target.value);
     };
 
-    if (props.user?.token) return <h1 className="auth">Welcome back, Fettan!</h1>;
+    if (props.user?.token) return <h1 className="auth">Welcome back, admin!</h1>;
     if (isLoading) return <Loading />;
 
     return (
